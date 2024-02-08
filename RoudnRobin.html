@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <h1>
+        Round Robin 
+    </h1>
+</head>
+<body>
+    <script>
+
+        
+        let arregloDeCadena = ["console.log('Hola');","a=1+2;","b = a-12;","console.log('Buenos dias');"
+,"console.log('3+12');","let numeroMayor;","console.log('Arriba');","a = Math.sqrt(1+2);", "console.log('proceso casi terminado');"];
+numeroDeProcesos = prompt("Ingresa el numero de procesos");
+numeroDeProcesos = parseInt(numeroDeProcesos);
+const arregloDeProcesos = [];
+
+
+inicializarSimulacion();
+
+
+function inicializarSimulacion()
+{
+    inicializarProcesos();
+    simulacion();
+    document.write("Terminado");
+
+}
+function simulacion()
+{
+    let procesosRestantes = numeroDeProcesos;
+    const arregloDeProcesosTerminados = [];
+    while(procesosRestantes !=0)
+    {
+        for(let i = 0; i <numeroDeProcesos; i++)
+        {
+            if(arregloDeProcesos[i].codigo!=0)
+            {
+                document.write("Proceso "+ arregloDeProcesos[i].numProceso +"<br>");
+                document.write("Linea de codigo: " + arregloDeProcesos[i].codigo[0] +"<br>");
+                arregloDeProcesos[i].codigo.shift();
+            }
+            else{
+                if(!arregloDeProcesosTerminados.includes(arregloDeProcesos[i].numProceso))
+                {
+                    procesosRestantes = procesosRestantes -1;
+                    arregloDeProcesosTerminados.push(i);
+                }
+                
+            }
+        }
+        
+    }
+    
+
+}
+
+
+function inicializarProcesos()
+{
+    let lineasDeCodigo = [];
+    for(let i = 0; i <numeroDeProcesos; i++)
+    {
+        arregloDeProcesos.push(new Object())
+        arregloDeProcesos[i].numProceso = i;
+        arregloDeProcesos[i].codigo = [];
+        cantidadDeLineas = Math.floor(Math.random() * 5) +1;
+        for(let j = 0; j <cantidadDeLineas; j++)
+        {
+            arregloDeProcesos[i].codigo.push(arregloDeCadena[Math.floor(Math.random() * arregloDeCadena.length)]);
+        }    
+    }
+    
+
+}
+
+    </script>
+
+</body>
+</html>>
